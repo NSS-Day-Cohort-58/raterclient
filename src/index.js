@@ -1,7 +1,7 @@
 import { createRoot } from "react-dom/client"
 import "./index.css"
 import { BrowserRouter } from "react-router-dom"
-import { GamerRater } from "../Rater"
+import { GamerRater } from "./components/Rater"
 
 
 const container = document.getElementById("root")

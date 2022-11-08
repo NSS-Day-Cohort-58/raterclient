@@ -1,5 +1,5 @@
 import { ApplicationViews } from "./views/ApplicationViews"
-import { NavBar } from "./components/nav/NavBar"
+import { NavBar } from "./nav/NavBar"
 
 
 export const GamerRater = () => (
