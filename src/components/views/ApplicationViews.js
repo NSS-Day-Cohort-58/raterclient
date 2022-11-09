@@ -4,6 +4,7 @@ import { Register } from "../auth/Register"
 import { GameDetails } from "../games/GameDetails"
 import { GameForm } from "../games/GameForm"
 import { GameList } from "../games/GameList"
+import { GameReviewForm } from "../games/GameReviewForm"
 import { Authorized } from "./Authorized"
 
 
@@ -17,6 +18,7 @@ export const ApplicationViews = () => {
                 <Route path="/games" element={ <GameList /> } />
                 <Route path="/games/new" element={ <GameForm /> } />
                 <Route path="/games/:gameId" element={ <GameDetails /> } />
+                <Route path="/reviewgame/:gameId" element={ <GameReviewForm /> } />
             </Route>
         </Routes>
     </>

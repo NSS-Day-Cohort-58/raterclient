@@ -1,26 +1,30 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { getSingleGame } from "../managers/GameManager"
+import "./Games.css"
 
 export const GameDetails = () => {
     const { gameId } = useParams()
     const [details, setDetails] = useState({
-        categories: []
+        categories: [],
+        reviews: []
     })
+    const navigate = useNavigate()
 
     useEffect(
         () => {
-            getSingleGame(gameId).then(
-                (theGame) => {
-                    setDetails(theGame)
-                }
-            )
+            getSingleGame(gameId).then(setDetails)
         },
         [gameId]
     )
 
     return <>
-        <h2>{details.title}</h2>
+        <div className="gameDetailHeader">
+            <h2>{details.title}</h2>
+            <button className="btn btn-primary"
+                onClick={() => navigate(`/reviewgame/${gameId}`)}
+                >Want to review?</button>
+        </div>
 
         <div>Designed by {details.designer}</div>
         <div>Release in the year {details.release_year}</div>
@@ -32,7 +36,14 @@ export const GameDetails = () => {
         <h3>In the following categories</h3>
         {
             details.categories.map(
-                cat => <div>Category {cat.description}</div>
+                cat => <div key={`category--${cat.description}`}>Category {cat.description}</div>
+            )
+        }
+
+        <h3>Reviews</h3>
+        {
+            details.reviews.map(
+                review => <div key={`review--${review.id}`}>{review.review} by {review.user.first_name} {review.user.last_name}</div>
             )
         }
     </>

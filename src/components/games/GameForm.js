@@ -9,7 +9,8 @@ export const GameForm = () => {
         numberOfPlayers: 0,
         recommendedAge: 0,
         designer: "",
-        timeToPlay: 0
+        timeToPlay: 0,
+        description: ""
     })
     const [categories, setCategories] = useState([])
     const [chosenCategories, setChosen] = useState(new Set())
@@ -22,7 +23,20 @@ export const GameForm = () => {
 
     const submitGame = (evt) => {
         evt.preventDefault()
-        createGame({}).then(() => navigate("/games"))
+
+        const gameToSave = {
+            numberOfPlayers: parseInt(game.numberOfPlayers),
+            releaseYear: parseInt(game.yearReleased),
+            recommendedAge: parseInt(game.recommendedAge),
+            timeToPlay: parseInt(game.timeToPlay),
+            designer: game.designer,
+            title: game.title,
+            imageFile: "",
+            description: game.description,
+            categories: Array.from(chosenCategories)
+        }
+
+        createGame(gameToSave).then(() => navigate("/games"))
     }
 
     const changeStateProperty = (evt) => {
@@ -48,6 +62,18 @@ export const GameForm = () => {
             </fieldset>
             <fieldset>
                 <div className="form-group">
+                    <label htmlFor="description">Description:</label>
+                    <input
+                        onChange={changeStateProperty}
+                        required autoFocus
+                        type="text" id="description"
+                        className="form-control"
+                        placeholder="Game description"
+                    />
+                </div>
+            </fieldset>
+            <fieldset>
+                <div className="form-group">
                     <label htmlFor="designer">Designer:</label>
                     <input
                         onChange={changeStateProperty}
@@ -64,7 +90,7 @@ export const GameForm = () => {
                     <input
                         onChange={changeStateProperty}
                         required autoFocus
-                        type="text" id="yearReleased"
+                        type="number" id="yearReleased"
                         className="form-control"
                         placeholder="Year of release"
                     />
@@ -76,7 +102,7 @@ export const GameForm = () => {
                     <input
                         onChange={changeStateProperty}
                         required autoFocus
-                        type="text" id="numberOfPlayers"
+                        type="number" id="numberOfPlayers"
                         className="form-control"
                         placeholder="How many people can play?"
                     />
@@ -88,7 +114,7 @@ export const GameForm = () => {
                     <input
                         onChange={changeStateProperty}
                         required autoFocus
-                        type="text" id="timeToPlay"
+                        type="number" id="timeToPlay"
                         className="form-control"
                         placeholder="How long does a game last?"
                     />
@@ -100,7 +126,7 @@ export const GameForm = () => {
                     <input
                         onChange={changeStateProperty}
                         required autoFocus
-                        type="text" id="recommendedAge"
+                        type="number" id="recommendedAge"
                         className="form-control"
                         placeholder="How old does someone have to be?"
                     />

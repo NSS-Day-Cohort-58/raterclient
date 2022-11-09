@@ -1,0 +1,4 @@
+.gameDetailHeader {
+    display: flex;
+    flex-direction: row;
+}

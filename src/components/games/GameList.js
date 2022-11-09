@@ -8,11 +8,7 @@ export const GameList = () => {
 
     useEffect(
         () => {
-            getAllGames().then(
-                (gamesArray) => {
-                    setGames(gamesArray)
-                }
-            )
+            getAllGames().then(setGames)
         },
         []
     )
